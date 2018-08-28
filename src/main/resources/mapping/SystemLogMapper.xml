@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SystemLogMapper">
+  <resultMap id="BaseResultMap" type="model.SystemLog">
+    <id column="system_log_id" jdbcType="INTEGER" property="systemLogId" />
+    <result column="log_type" jdbcType="TINYINT" property="logType" />
+    <result column="system_log_time" jdbcType="BIGINT" property="systemLogTime" />
+    <result column="event_level" jdbcType="TINYINT" property="eventLevel" />
+    <result column="system_log_result" jdbcType="TINYINT" property="systemLogResult" />
+    <result column="log_describe" jdbcType="VARCHAR" property="logDescribe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    system_log_id, log_type, system_log_time, event_level, system_log_result, log_describe
+  </sql>
+  <select id="selectByExample" parameterType="model.SystemLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.SystemLogExample">
+    delete from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.SystemLog">
+    insert into system_log (system_log_id, log_type, system_log_time, 
+      event_level, system_log_result, log_describe
+      )
+    values (#{systemLogId,jdbcType=INTEGER}, #{logType,jdbcType=TINYINT}, #{systemLogTime,jdbcType=BIGINT}, 
+      #{eventLevel,jdbcType=TINYINT}, #{systemLogResult,jdbcType=TINYINT}, #{logDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SystemLog">
+    insert into system_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        system_log_id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time,
+      </if>
+      <if test="eventLevel != null">
+        event_level,
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result,
+      </if>
+      <if test="logDescribe != null">
+        log_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        #{systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        #{systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="eventLevel != null">
+        #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.SystemLogExample" resultType="java.lang.Integer">
+    select count(*) from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update system_log
+    <set>
+      <if test="record.systemLogId != null">
+        system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null">
+        log_type = #{record.logType,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogTime != null">
+        system_log_time = #{record.systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.eventLevel != null">
+        event_level = #{record.eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogResult != null">
+        system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="record.logDescribe != null">
+        log_describe = #{record.logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update system_log
+    set system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=TINYINT},
+      system_log_time = #{record.systemLogTime,jdbcType=BIGINT},
+      event_level = #{record.eventLevel,jdbcType=TINYINT},
+      system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      log_describe = #{record.logDescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SystemLog">
+    update system_log
+    <set>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time = #{systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="eventLevel != null">
+        event_level = #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        log_describe = #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SystemLog">
+    update system_log
+    set log_type = #{logType,jdbcType=TINYINT},
+      system_log_time = #{systemLogTime,jdbcType=BIGINT},
+      event_level = #{eventLevel,jdbcType=TINYINT},
+      system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      log_describe = #{logDescribe,jdbcType=VARCHAR}
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="model.SystemLog">
+    <id column="system_log_id" jdbcType="INTEGER" property="systemLogId" />
+    <result column="log_type" jdbcType="TINYINT" property="logType" />
+    <result column="system_log_time" jdbcType="BIGINT" property="systemLogTime" />
+    <result column="event_level" jdbcType="TINYINT" property="eventLevel" />
+    <result column="system_log_result" jdbcType="TINYINT" property="systemLogResult" />
+    <result column="log_describe" jdbcType="VARCHAR" property="logDescribe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    system_log_id, log_type, system_log_time, event_level, system_log_result, log_describe
+  </sql>
+  <select id="selectByExample" parameterType="model.SystemLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.SystemLogExample">
+    delete from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.SystemLog">
+    insert into system_log (system_log_id, log_type, system_log_time, 
+      event_level, system_log_result, log_describe
+      )
+    values (#{systemLogId,jdbcType=INTEGER}, #{logType,jdbcType=TINYINT}, #{systemLogTime,jdbcType=BIGINT}, 
+      #{eventLevel,jdbcType=TINYINT}, #{systemLogResult,jdbcType=TINYINT}, #{logDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SystemLog">
+    insert into system_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        system_log_id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time,
+      </if>
+      <if test="eventLevel != null">
+        event_level,
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result,
+      </if>
+      <if test="logDescribe != null">
+        log_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        #{systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        #{systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="eventLevel != null">
+        #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.SystemLogExample" resultType="java.lang.Integer">
+    select count(*) from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update system_log
+    <set>
+      <if test="record.systemLogId != null">
+        system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null">
+        log_type = #{record.logType,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogTime != null">
+        system_log_time = #{record.systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.eventLevel != null">
+        event_level = #{record.eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogResult != null">
+        system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="record.logDescribe != null">
+        log_describe = #{record.logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update system_log
+    set system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=TINYINT},
+      system_log_time = #{record.systemLogTime,jdbcType=BIGINT},
+      event_level = #{record.eventLevel,jdbcType=TINYINT},
+      system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      log_describe = #{record.logDescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SystemLog">
+    update system_log
+    <set>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time = #{systemLogTime,jdbcType=BIGINT},
+      </if>
+      <if test="eventLevel != null">
+        event_level = #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        log_describe = #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SystemLog">
+    update system_log
+    set log_type = #{logType,jdbcType=TINYINT},
+      system_log_time = #{systemLogTime,jdbcType=BIGINT},
+      event_level = #{eventLevel,jdbcType=TINYINT},
+      system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      log_describe = #{logDescribe,jdbcType=VARCHAR}
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="model.SystemLog">
+    <id column="system_log_id" jdbcType="INTEGER" property="systemLogId" />
+    <result column="log_type" jdbcType="TINYINT" property="logType" />
+    <result column="system_log_time" jdbcType="TIMESTAMP" property="systemLogTime" />
+    <result column="event_level" jdbcType="TINYINT" property="eventLevel" />
+    <result column="system_log_result" jdbcType="TINYINT" property="systemLogResult" />
+    <result column="log_describe" jdbcType="VARCHAR" property="logDescribe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    system_log_id, log_type, system_log_time, event_level, system_log_result, log_describe
+  </sql>
+  <select id="selectByExample" parameterType="model.SystemLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_log
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.SystemLogExample">
+    delete from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.SystemLog">
+    insert into system_log (system_log_id, log_type, system_log_time, 
+      event_level, system_log_result, log_describe
+      )
+    values (#{systemLogId,jdbcType=INTEGER}, #{logType,jdbcType=TINYINT}, #{systemLogTime,jdbcType=TIMESTAMP}, 
+      #{eventLevel,jdbcType=TINYINT}, #{systemLogResult,jdbcType=TINYINT}, #{logDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SystemLog">
+    insert into system_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        system_log_id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time,
+      </if>
+      <if test="eventLevel != null">
+        event_level,
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result,
+      </if>
+      <if test="logDescribe != null">
+        log_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemLogId != null">
+        #{systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        #{systemLogTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventLevel != null">
+        #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.SystemLogExample" resultType="java.lang.Integer">
+    select count(*) from system_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update system_log
+    <set>
+      <if test="record.systemLogId != null">
+        system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null">
+        log_type = #{record.logType,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogTime != null">
+        system_log_time = #{record.systemLogTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.eventLevel != null">
+        event_level = #{record.eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.systemLogResult != null">
+        system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="record.logDescribe != null">
+        log_describe = #{record.logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update system_log
+    set system_log_id = #{record.systemLogId,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=TINYINT},
+      system_log_time = #{record.systemLogTime,jdbcType=TIMESTAMP},
+      event_level = #{record.eventLevel,jdbcType=TINYINT},
+      system_log_result = #{record.systemLogResult,jdbcType=TINYINT},
+      log_describe = #{record.logDescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SystemLog">
+    update system_log
+    <set>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogTime != null">
+        system_log_time = #{systemLogTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventLevel != null">
+        event_level = #{eventLevel,jdbcType=TINYINT},
+      </if>
+      <if test="systemLogResult != null">
+        system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      </if>
+      <if test="logDescribe != null">
+        log_describe = #{logDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SystemLog">
+    update system_log
+    set log_type = #{logType,jdbcType=TINYINT},
+      system_log_time = #{systemLogTime,jdbcType=TIMESTAMP},
+      event_level = #{eventLevel,jdbcType=TINYINT},
+      system_log_result = #{systemLogResult,jdbcType=TINYINT},
+      log_describe = #{logDescribe,jdbcType=VARCHAR}
+    where system_log_id = #{systemLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

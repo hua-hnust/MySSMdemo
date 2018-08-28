@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--启动mvc注解功能-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="text"/>
+                            <constructor-arg index="1" value="plain"/>
+                            <constructor-arg index="2" value="UTF-8"/>
+                        </bean>
+                        <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="*"/>
+                            <constructor-arg index="1" value="*"/>
+                            <constructor-arg index="2" value="UTF-8"/>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+
+    <!-- 引入jdbc.properties属性文件 -->
+    <context:property-placeholder location="classpath*:jdbc.properties"/>
+    <!-- 自动扫描(自动注入)，扫描service这个包以及它的子包的所有使用@Service注解标注的类 -->
+    <context:component-scan base-package="com.hnust.hua">
+        <context:include-filter type="regex" expression="com.hnust.hua.controller.*"/>
+        <context:include-filter type="regex" expression="com.hnust.hua.dao.*"/>
+        <context:include-filter type="regex" expression="com.hnust.hua.service.*"/>
+    </context:component-scan>
+    <!-- 引入spring-mybatis.xml 到当前容器中 -->
+    <import resource="classpath*:spring-mybatis.xml"/>
+    <context:annotation-config />
+
+</beans>

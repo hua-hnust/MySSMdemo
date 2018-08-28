@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - dsm@localhost" uuid="0129d174-039d-42cd-aabc-56bdc16dc8a3">
+    <database-info product="MySQL" version="5.7.20-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.45 ( Revision: 9131eefa398531c7dc98776e8a3fe839e544c5b2 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="dsm"/>
+      <table id="2" parent="1" name="monitor_object">
+        <comment>监控数据入库的sql集合表</comment>
+      </table>
+      <column id="3" parent="2" name="object_id">
+        <mandatory>1</mandatory>
+        <data-type>int(8)</data-type>
+      </column>
+      <column id="4" parent="2" name="object_name">
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="5" parent="2" name="db_type">
+        <comment>数据库类型</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(16)</data-type>
+      </column>
+      <column id="6" parent="2" name="monitor_cycle">
+        <mandatory>1</mandatory>
+        <data-type>varchar(12)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="7" parent="2" name="column_num">
+        <comment>字段列数</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(8)</data-type>
+      </column>
+      <column id="8" parent="2" name="table_name">
+        <comment>入库表名</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="9" parent="2" name="sql_text">
+        <comment>sql语句</comment>
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="10" parent="2" name="db_version">
+        <comment>数据库类型</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <key id="11" parent="2" name="PRIMARY">
+        <columns>object_id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
