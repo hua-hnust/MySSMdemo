@@ -8,7 +8,7 @@ import java.net.URL;
 
 /**
  * Created by hua on 2018-04-11.
- * Describe:
+ * Describe: 获取项目路径
  */
 public class GetPathTest {
 
