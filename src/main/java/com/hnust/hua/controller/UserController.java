@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.hnust.hua.service.StudentsService;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by hua on 2018-04-03.
@@ -21,8 +22,11 @@ public class UserController {
 
     @RequestMapping(value = "/students")
     @ResponseBody
-    public Students selectStudents(@RequestParam(value = "id") Integer id){
-        return studentsService.getStudentsByName(id);
+    public ModelAndView selectStudents(@RequestParam(value = "id") Integer id){
+        ModelAndView mv = new ModelAndView("hello");
+        Students students = studentsService.getStudentsByName(id);
+        mv.addObject("students",students);
+        return mv;
     }
 
 }
