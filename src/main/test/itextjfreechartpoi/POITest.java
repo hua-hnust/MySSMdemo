@@ -1,4 +1,4 @@
-package demo;
+package itextjfreechartpoi;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
