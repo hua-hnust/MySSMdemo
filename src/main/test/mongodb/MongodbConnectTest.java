@@ -1,4 +1,4 @@
-package demo;
+package mongodb;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
