@@ -46,10 +46,10 @@ public class InsertLargeData {
             // 比起st，pst会更好些
             PreparedStatement  pst = (PreparedStatement) conn.prepareStatement("");//准备执行语句
             // 外层循环，总提交事务次数
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 10; i++) {
                 suffix = new StringBuffer();
                 // 第j次提交步长
-                for (int j = 1; j <= 10000; j++) {
+                for (int j = 1; j <= 1000; j++) {
                     // 构建SQL后缀
                     suffix.append("("+1+","+1537276754020L+","+1+","+-1+","+"'测试日志信息'" +"),");
                 }
@@ -73,7 +73,7 @@ public class InsertLargeData {
         // 结束时间
         Long end = new Date().getTime();
         // 耗时
-        System.out.println("5万条数据插入花费时间 : " + (end - begin) / 1000 + " s");
+        System.out.println("1万条数据插入花费时间 : " + (end - begin) / 1000 + " s");
         System.out.println("插入完成");
     }
 }

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Created by xhua on 2018-08-22.
- * Describe:
+ * Describe: if语句返回结果测试
  */
 public class IfAndReturnDemo {
 

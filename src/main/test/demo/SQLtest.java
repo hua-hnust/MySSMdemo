@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Created by hua on 2018-04-18.
- * Describe:
+ * Describe: when   then SQL条件拼接
  */
 public class SQLtest {
     @Test

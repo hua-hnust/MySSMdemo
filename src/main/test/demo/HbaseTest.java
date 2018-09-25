@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  * Created by xhua on 2018-08-18.
- * Describe:
+ * Describe:  连接hbase
  */
 public class HbaseTest {
 

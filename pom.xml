@@ -130,13 +130,29 @@
       <artifactId>poi</artifactId>
       <version>3.15</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+    <!-- POI -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>3.17</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>3.8</version>
+    </dependency>
+    <!--  jfreechart  -->
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jfreechart</artifactId>
+      <version>1.0.13</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jfree/jcommon -->
+    <dependency>
+      <groupId>org.jfree</groupId>
+      <artifactId>jcommon</artifactId>
+      <version>1.0.24</version>
+    </dependency>
 
     <!-- 生成PDF扩展插件 -->
     <dependency>
@@ -149,29 +165,21 @@
       <artifactId>xmlworker</artifactId>
       <version>5.5.9</version>
     </dependency>
+    <!-- itext 中文支持 -->
     <dependency>
       <groupId>com.itextpdf</groupId>
       <artifactId>itext-asian</artifactId>
       <version>5.2.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
+      <version>2.1.7</version>
+    </dependency>
+
 
     <!-- swagger依赖 -->
-    <!--<dependency>-->
-      <!--<groupId>com.mangofactory</groupId>-->
-      <!--<artifactId>swagger-springmvc</artifactId>-->
-      <!--<version>1.0.2</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-      <!--<artifactId>jackson-core</artifactId>-->
-      <!--<version>2.5.1</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-      <!--<artifactId>jackson-annotations</artifactId>-->
-      <!--<version>2.7.5</version>-->
-    <!--</dependency>-->
-
     <dependency>
       <groupId>com.mangofactory</groupId>
       <artifactId>swagger-springmvc</artifactId>
@@ -187,8 +195,6 @@
       <artifactId>springfox-swagger-ui</artifactId>
       <version>2.7.0</version>
     </dependency>
-
-
 
     <!-- mongodb连接驱动 -->
     <dependency>
@@ -214,7 +220,6 @@
       <artifactId>httpclient</artifactId>
       <version>4.5.5</version>
     </dependency>
-
     <dependency>
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>

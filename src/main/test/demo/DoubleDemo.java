@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Created by xhua on 2018-09-17.
- * Describe:
+ * Describe: double小数位数测试
  */
 public class DoubleDemo {
     @Test
