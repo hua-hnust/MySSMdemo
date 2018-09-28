@@ -1,4 +1,4 @@
-package demo;
+package mysql;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import java.sql.*;
 
 /**
  * Created by hua on 2018-04-18.
- * Describe:
+ * Describe:  when then SQL拼接
  */
 public class SQLTest2 {
     @Test

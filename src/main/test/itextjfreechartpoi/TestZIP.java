@@ -17,10 +17,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-class TestZip {
+class TestZIP {
     public static void main(String[] args) {
-        List<String> list =new ArrayList();
-        String[] strs = new String[5];
         StringBuffer sb=new StringBuffer();
         try{
             sb.append("F:/1.txt,");
@@ -49,7 +47,6 @@ class TestZip {
             }
             zos.closeEntry();
         }
-//        zos.setEncoding("GBK");
         zos.closeEntry();
         zos.close();
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by xhua on 2018-09-19.
- * Describe:
+ * Describe:   mong
  */
 public class MongodbDemo {
     @Test
@@ -43,6 +43,12 @@ public class MongodbDemo {
         MongoDatabase mongoDatabase = mongoClient.getDatabase("mydb");
         System.out.println("----------连接成功----------");
 
+        //执行命令获取数据库状态信息
+        Document commandResult = mongoDatabase.runCommand(new BasicDBObject("serverStatus",Boolean.TRUE));
+        Document connectionInfo = (Document) commandResult.get("connections");
+        System.out.println("连接数信息："+connectionInfo.toJson());
+        System.out.println("可用连接："+connectionInfo.get("available"));
+
         //获取所有数据库
         MongoIterable<String> databases = mongoClient.listDatabaseNames();
         System.out.println("数据库列表：");
@@ -64,6 +70,8 @@ public class MongodbDemo {
         //mongoDatabase.createCollection("test2");
         MongoCollection<Document> collection = mongoDatabase.getCollection("test");
         System.out.println("选择集合test成功");
+        //集合数据量
+        System.out.println("集合数据量："+collection.count());
         //插入文档
 //        Document document = new Document("name","小明").append("sex","男").append("age",23);
 //        Document document1 = new Document("name","小红").append("sex","女").append("age",19);
@@ -76,14 +84,25 @@ public class MongodbDemo {
 
         //删除符合条件的第一个文档
 //        collection.deleteOne(Filters.eq("name","小明"));
-        //将集合中name=小明的集合的age set为22
+        //删除符合条件的多个文档
+//        collection.deleteMany(Filters.eq("",""));
+        //将集合中name=小明的age set为22
 //        collection.updateMany(Filters.eq("name","小明"),new Document("$set",new Document("age","22")));
 
+//        //多条件组合
+//        AggregateIterable aggregationOutput = collection.aggregate();
+//        MongoCursor<Document> cursor =  aggregationOutput.iterator();
+//        while (cursor.hasNext()){
+//
+//        }
+
+
         //遍历文档
+        System.out.println("1、遍历集合");
         FindIterable<Document> findIterable = collection.find();
         MongoCursor<Document> mongoCursor = findIterable.iterator();
         while (mongoCursor.hasNext()){
-            System.out.println(mongoCursor.next());
+            System.out.println(mongoCursor.next().toJson());
         }
 
 
@@ -119,7 +138,12 @@ public class MongodbDemo {
                 new BasicDBObject("age",new BasicDBObject(QueryOperators.GT,19)),
                 new BasicDBObject("age",new BasicDBObject(QueryOperators.LTE,23))
         });
-        FindIterable<Document> sortAndFilter1 = collection.find(searchObject).sort(sortBosn);
+
+        BasicDBObject searchObject2 = new BasicDBObject();
+        searchObject2.put("age",new BasicDBObject(QueryOperators.LTE,23));
+        searchObject2.put("name","小红");
+
+        FindIterable<Document> sortAndFilter1 = collection.find(searchObject2).sort(sortBosn);
         MongoCursor<Document> mongoCursor4 = sortAndFilter1.iterator();
         System.out.println("多条件查询后的集合：");
         while (mongoCursor4.hasNext()){
@@ -145,7 +169,7 @@ public class MongodbDemo {
             System.out.println(mongoCursor6.next());
         }
 
-
+        mongoCursor.close();
         mongoClient.close();
 
     }

@@ -1,4 +1,4 @@
-package demo;
+package mysql;
 
 import org.junit.Test;
 
