@@ -3,6 +3,7 @@ package com.hnust.hua.swagger;
 /**
  * Created by xhua on 2018-08-28.
  * Describe:
+ *      访问路径：http://localhost:8080/swagger-ui.html
  */
 
 import org.springframework.context.annotation.Bean;
