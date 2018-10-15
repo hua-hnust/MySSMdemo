@@ -51,9 +51,9 @@ public class InsertLargeData {
                 suffix = new StringBuffer();
                 Long startTime = System.currentTimeMillis();
                 // 第j次提交步长
-                for (int j = 1; j <= 50000; j++) {
+                for (int j = 1; j <= 5000; j++) {
                     // 构建SQL后缀
-                    suffix.append("("+1+","+1537276754020L+","+1+","+-1+","+"'测试日志信息'" +"),");
+                    suffix.append("("+1+","+(1538967274000L+j*5000L)+","+1+","+-1+","+"'测试日志信息'" +"),");
                 }
 
                 Long endTime = System.currentTimeMillis();

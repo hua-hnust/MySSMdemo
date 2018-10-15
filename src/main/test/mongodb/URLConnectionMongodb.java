@@ -1,11 +1,10 @@
 package mongodb;
 
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientURI;
+import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.junit.Test;
+import org.springframework.orm.jpa.vendor.Database;
 
 /**
  * Created by xhua on 2018-09-28.
@@ -22,17 +21,24 @@ public class URLConnectionMongodb {
         //连接池与数据库最大连接数  默认为100
         builder.connectionsPerHost(10);
         //连接超时设置
-        builder.connectTimeout(2000);
+        builder.connectTimeout(5000);
         //空闲时间
         builder.maxConnectionIdleTime(60*1000);
 //        MongoClientOptions options = builder.build();
 
-        String url = "mongodb://admin:Ceshi123@172.19.1.96:27017/admin?AutoConnectRetry=true";
+        String url = "mongodb://admin:ceshi123@172.19.1.96:27017/admin?AutoConnectRetry=true";
         MongoClientURI mongoClientURI = new MongoClientURI(url,builder);
         MongoClient mongoClient = new MongoClient(mongoClientURI);
-        DB db = mongoClient.getDB("admin");
+
+        MongoDatabase db = mongoClient.getDatabase("admin");
+        //不能执行
+        Document document = db.runCommand(new BasicDBObject("serverStatus",Boolean.TRUE));
+        Document connectionInfo = (Document) document.get("connections");
+        System.out.println("可用连接："+connectionInfo.get("available"));
+
+//        DB db = mongoClient.getDB("admin");
         //URL连接方式不能执行下面的命令
-        db.command("serverStatus");
+//        db.command("serverStatus");
         System.out.println("96连接成功");
 
 //        "mongodb://username:password@mongoserver1:34001,mongoserver2:34001,mongoserver3:34001/dbname?AutoConnectRetry=true";
