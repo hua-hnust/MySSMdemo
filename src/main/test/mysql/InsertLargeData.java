@@ -18,7 +18,7 @@ public class InsertLargeData {
 
     @Test
     public void test() throws ClassNotFoundException, SQLException {
-        final String url = "jdbc:mysql://172.19.1.18/dsm";
+        final String url = "jdbc:mysql://172.19.1.19/dsm";
         final String name = "com.mysql.jdbc.Driver";
         final String user = "root";
         final String password = "Ankki_mySQL123";

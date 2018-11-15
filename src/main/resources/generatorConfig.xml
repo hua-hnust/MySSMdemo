@@ -16,7 +16,7 @@
         </commentGenerator>
 
         <!-- !!!! Database Configurations !!!! -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/user" userId="root" password="xhua"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/news" userId="root" password="xhua"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
         <!-- !!!! 需要生成的表名 !!!! -->
-        <table tableName="students"/>
+        <table tableName="people"/>
 
         <!--以下会注释掉example-->
         <!--<table tableName="students" domainObjectName="Students" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->

@@ -3,10 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--启动mvc注解功能-->
     <mvc:annotation-driven>
@@ -33,13 +37,14 @@
     </mvc:annotation-driven>
 
     <!-- 将 springSwaggerConfig加载到spring容器 -->
-    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config"/>
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"
+          id="swagger2Config"/>
     <!-- 将自定义的swagger配置类加载到spring容器 -->
-    <bean class="com.hnust.hua.swagger.SwaggerConfig" />
+    <bean class="com.hnust.hua.swagger.SwaggerConfig"/>
 
     <!-- 静态资源文件，swagger-ui.html 不会被Spring MVC拦截 -->
-    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
-    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -54,9 +59,16 @@
         <context:include-filter type="regex" expression="com.hnust.hua.controller.*"/>
         <context:include-filter type="regex" expression="com.hnust.hua.dao.*"/>
         <context:include-filter type="regex" expression="com.hnust.hua.service.*"/>
+        <context:include-filter type="regex" expression="com.com.hnust.hua.newstimertask.*"/>
     </context:component-scan>
     <!-- 引入spring-mybatis.xml 到当前容器中 -->
     <import resource="classpath*:spring-mybatis.xml"/>
-    <context:annotation-config />
+    <context:annotation-config/>
+
+    <!--定时任务配置-->
+    <task:scheduled-tasks>
+        <!--每天零点启动-->
+        <task:scheduled ref="newTimerTask" method="getNews" cron="0 0 0 * * ?"/>
+    </task:scheduled-tasks>
 
 </beans>
