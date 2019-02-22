@@ -302,6 +302,17 @@
       <version>1.9.0</version>
     </dependency>
 
+    <!-- quartz 任务调度-->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>2.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz-jobs</artifactId>
+      <version>2.2.3</version>
+    </dependency>
 
   </dependencies>
 
